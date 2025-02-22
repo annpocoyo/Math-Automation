@@ -67,6 +67,7 @@ class AutoMathleticsClass(AutoBrowserBase):
         value = value.strip("=\n  ") # Post processing
         value = value.replace("÷", "/").replace("×", "*") \
         .replace("\n)", ")").replace("\n", "**") # DO NOT ASK ME HOW '\n' WORKS!
+        value = " ".join(value.split()) # Remove repeating spaces (this has no purpose but to be pretty in the debugger!)
         self.driver.switch_to.default_content() # Switch to root site
         return value # Return equation
     
