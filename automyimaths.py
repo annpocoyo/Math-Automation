@@ -15,7 +15,7 @@ sys.path.append(f"{os.path.dirname(os.path.abspath(sys.argv[0]))}/Library")
 
 # Load custom librarys
 from auto_my_imaths_library import AutoMyIMathsClass
-auto_infinite_craft = AutoMyIMathsClass()
+auto_my_imaths = AutoMyIMathsClass()
 
 def main():
     # PLACEHOLDER

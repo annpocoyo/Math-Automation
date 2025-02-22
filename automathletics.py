@@ -15,7 +15,7 @@ sys.path.append(f"{os.path.dirname(os.path.abspath(sys.argv[0]))}/Library")
 
 # Load custom librarys
 from auto_mathletics_library import AutoMathleticsClass
-auto_infinite_craft = AutoMathleticsClass()
+auto_mathletics = AutoMathleticsClass()
 
 def main():
     # PLACEHOLDER
