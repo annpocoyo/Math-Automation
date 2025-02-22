@@ -4,4 +4,5 @@
 # Pycache
 __pycache__
 
-# 
+# Chrome Profile
+/profile

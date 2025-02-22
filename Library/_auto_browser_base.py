@@ -10,6 +10,7 @@ import platform # To find out if we are on Mac or something else
 from selenium import webdriver # For Browser Control
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 
 class AutoBrowserBase:
     """This class contains all functions used to control the browser"""
@@ -32,9 +33,13 @@ class AutoBrowserBase:
         # Setup service object for custom gecko driver path
         service = Service(executable_path = chrome_driver_path)
 
+        # Setup options for custom profile
+        options = Options()
+        options.add_argument("--user-data-dir=./profile")
+
         # Load driver for website
         # Make sure custom chromedriver is respected
-        self.driver = webdriver.Chrome(executable_path = chrome_driver_path)
+        self.driver = webdriver.Chrome(service=service, options=options)
 
         # Load the website
         self.driver.get(url)
