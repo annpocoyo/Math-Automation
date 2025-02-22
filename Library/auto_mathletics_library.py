@@ -52,7 +52,7 @@ class AutoMathleticsClass(AutoBrowserBase):
 
     @property
     def quiz_finished(self):
-        """Return True if quiz finished, otherwise False."""
+        """True if quiz finished, otherwise False."""
         time.sleep(.15) # Give time for finish screen to show!
         return len(
             self.driver.find_elements(By.XPATH, "//*[contains(text(), 'Congratulations!')]")) > 0
@@ -73,7 +73,7 @@ class AutoMathleticsClass(AutoBrowserBase):
     
     @property
     def current_type(self):
-        """Get current type of question: currently only `evaluation` is detected."""
+        """Current type of question: currently only `evaluation` is detected."""
         # Get top level question instructions and compare
         self.driver.switch_to.frame(0) # Switch to question IFrame
         instructions = self.driver.find_elements(By.CLASS_NAME, "question-text")[0].text
