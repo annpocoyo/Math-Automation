@@ -78,7 +78,7 @@ class AutoMathleticsClass(AutoBrowserBase):
         instructions = self.driver.find_elements(By.CLASS_NAME, "question-text")[0].text
         self.driver.switch_to.default_content() # Switch to root site
         match instructions:
-            case "Evaluate:":
+            case x if "Evaluate" in x:
                 return "evaluation"
             case _:
                 return None
