@@ -18,10 +18,16 @@ from auto_my_imaths_library import AutoMyIMathsClass
 auto_my_imaths = AutoMyIMathsClass()
 
 def main():
-    # PLACEHOLDER
+    # We begin:
+    # Wait for user to confirm to have started activity.
+    print("Please sign into MyiMaths and start your target activity.")
+    input("Press enter when you're ready:")
 
-    while True:
+    # Begin question loop
+    while True: # TODO: Detect when questions finished
         pass
+
+    input("Question set finished: Yay!!!:")
 
 if __name__ == '__main__':
     main()

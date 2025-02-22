@@ -15,4 +15,4 @@ class AutoMyIMathsClass(AutoBrowserBase):
     def __init__(self):
         # Initalize Class
         # First we need to contact our parent's constructer
-        super().__init__(url = "PLACEHOLDER")
+        super().__init__(url = "https://app.myimaths.com/myportal/student/my_homework")
