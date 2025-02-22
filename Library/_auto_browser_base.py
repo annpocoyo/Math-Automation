@@ -33,9 +33,10 @@ class AutoBrowserBase:
         # Setup service object for custom gecko driver path
         service = Service(executable_path = chrome_driver_path)
 
-        # Setup options for custom profile
+        # Setup command line arguments
         options = Options()
-        options.add_argument("--user-data-dir=./profile")
+        options.add_argument("--user-data-dir=./profile") # for custom profile
+        options.add_argument("--hide-crash-restore-bubble") # Disable annoying crash restore bubble
 
         # Load driver for website
         # Make sure custom chromedriver is respected
