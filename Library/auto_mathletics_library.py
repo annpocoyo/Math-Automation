@@ -38,15 +38,15 @@ class AutoMathleticsClass(AutoBrowserBase):
 
     def wait_load(self):
         """Wait for question to load."""
-        # Loop until answer box found.
-        answer_boxs = [] # To stop exception from throwing!
-        while len(answer_boxs) != 1:
+        # Loop until question found.
+        questions = [] # To stop exception from throwing!
+        while len(questions) < 1:
             try:
                 self.driver.switch_to.frame(0) # Switch to question IFrame
-                answer_boxs = self.driver.find_elements(By.CLASS_NAME, "input3p-focused")
+                questions = self.driver.find_elements(By.CLASS_NAME, "question-text")
                 self.driver.switch_to.default_content() # Switch to root site
             except (StaleElementReferenceException, NoSuchFrameException):
-                # Not loaded yet
+                # Not loaded yet:
                 continue
         self.driver.switch_to.default_content() # Switch to root site
 
@@ -69,3 +69,16 @@ class AutoMathleticsClass(AutoBrowserBase):
         .replace("\n)", ")").replace("\n", "**") # DO NOT ASK ME HOW '\n' WORKS!
         self.driver.switch_to.default_content() # Switch to root site
         return value # Return equation
+    
+    @property
+    def current_type(self):
+        """Get current type of question: currently only `evaluation` is detected."""
+        # Get top level question instructions and compare
+        self.driver.switch_to.frame(0) # Switch to question IFrame
+        instructions = self.driver.find_elements(By.CLASS_NAME, "question-text")[0].text
+        self.driver.switch_to.default_content() # Switch to root site
+        match instructions:
+            case "Evaluate:":
+                return "evaluation"
+            case _:
+                return None

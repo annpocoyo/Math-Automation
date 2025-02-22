@@ -25,14 +25,17 @@ def main():
 
     # Question loop
     while not auto_mathletics.quiz_finished:
-        # TODO: Add support for more types of questions
         auto_mathletics.wait_load() # Wait for question to load
-        answer = eval(auto_mathletics.current_equation) # Get & evaluate question
-        auto_mathletics.send_answer(answer) # Send in answer
+        # TODO: Add automated support for more types of questions
+        match auto_mathletics.current_type:
+            case "evaluation":
+                answer = eval(auto_mathletics.current_equation) # Get & evaluate question
+                auto_mathletics.send_answer(answer) # Send in answer
+            case _:
+                print("ERROR: Unknown question format detected: Please complete manually and move to next question!")
+                input("Press enter once you have moved to the next question:")
 
-    print("Question set finished: Yay!!!")
-    while True:
-        pass
+    input("Question set finished: Yay!!!:")
 
 if __name__ == '__main__':
     main()
