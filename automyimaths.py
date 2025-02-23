@@ -50,6 +50,7 @@ def main():
         input("Please move to the next page and then press enter:")
 
     input("Question set finished: Yay!!!:")
+    auto_my_imaths.driver.quit() # Cleanly shutdown the browser
 
 if __name__ == '__main__':
     main()
