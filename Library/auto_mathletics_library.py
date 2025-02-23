@@ -120,7 +120,7 @@ class AutoMathleticsClass(AutoBrowserBase):
         instructions = self.driver.find_elements(By.CLASS_NAME, "question-text")[0].text
         self.driver.switch_to.default_content() # Switch to root site
         match instructions:
-            case x if "Evaluate" in x:
+            case x if "Evaluate" in x or "Calculate" in x:
                 return "evaluation"
             case "Will the answer be negative, zero or positive?" | \
                 "Will the answer be positive, negative, or zero?":
