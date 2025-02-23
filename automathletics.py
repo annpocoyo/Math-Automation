@@ -36,6 +36,7 @@ def main():
                 input("Press enter once you have moved to the next question:")
 
     input("Question set finished: Yay!!!:")
+    auto_mathletics.driver.quit() # Cleanly shutdown the browser before we exit.
 
 if __name__ == '__main__':
     main()
