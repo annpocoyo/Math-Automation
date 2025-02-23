@@ -25,9 +25,10 @@ def main():
     # Question loop
     while not auto_mathletics.quiz_finished:
         auto_mathletics.wait_load() # Wait for question to load
-        # TODO: Add automated support for more types of questions
+
+        # Check question type
         match auto_mathletics.current_type:
-            case "evaluation":
+            case "evaluation" | "integertype":
                 answer = eval(auto_mathletics.current_equation) # Get & evaluate question
                 auto_mathletics.send_answer(answer) # Send in answer
             case _:
