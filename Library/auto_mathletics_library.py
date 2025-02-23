@@ -62,7 +62,7 @@ class AutoMathleticsClass(AutoBrowserBase):
         """Current equation on display. Only works on evaluation type questions!"""
         # Make sure current question is an evaluation type
         if not self.current_type == "evaluation":
-            return None
+            return
         
         # Get current equation
         self.driver.switch_to.frame(0) # Switch to question IFrame
