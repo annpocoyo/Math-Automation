@@ -3,4 +3,15 @@
 
 Automate Mathletics and (WIP) MyiMaths!
 
-Currently Mathletics automation only supports "evaluation" type questions (the type which striaght up give you an equation!). If it encounters an unknown question type it will ask the user to complete it manually.
+## Support
+
+### Mathletics
+
+* ***Integers:***
+  * **Evaluation:** Questions that give you an equation and ask you to solve it striaght up.
+  * **Positive, Negative or Zero:** Questions that give you an equation and ask if it will equate to an positive or negative number, or zero.
+* More will come as I keep getting more and more repetitive homework! :)
+
+### MyiMaths
+
+* Work in Progress (checkout the my_imaths_automation branch and run it to see current progress)
