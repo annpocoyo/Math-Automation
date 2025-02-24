@@ -30,7 +30,7 @@ class AutoBrowserBase:
                         .strip('\"') \
                         .strip("\'") # Strip out quotes from the path just incase
 
-        # Setup service object for custom gecko driver path
+        # Setup service object for custom chromedriver path
         service = Service(executable_path = chrome_driver_path)
 
         # Setup command line arguments
