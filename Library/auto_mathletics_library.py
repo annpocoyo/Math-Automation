@@ -37,14 +37,8 @@ class AutoMathleticsClass(AutoBrowserBase):
 
         # Send answer and RETURN
         answer_box.send_keys(answer)
-        self.driver.find_element(By.XPATH, "//html").send_keys(Keys.RETURN)
-        time.sleep(.15)
-        try:
-            self.driver.find_element(By.XPATH, "//html").send_keys(Keys.RETURN)
-        except NoSuchElementException:
-            # We've probably finished the question set. Ignore
-            pass
         self.driver.switch_to.default_content() # Switch to root site
+        self._confirm_answer()
 
     def _integertype_send_answer(self, answer: int):
         """Selects either "Negative", "Positive" or "Zero" depending on answer provided!"""
@@ -63,14 +57,20 @@ class AutoMathleticsClass(AutoBrowserBase):
             negative_button.click()
         
         # Move to next question
-        self.driver.find_element(By.XPATH, "//html").send_keys(Keys.RETURN)
+        self.driver.switch_to.default_content() # Switch to root site
+        self._confirm_answer()
+
+    def _confirm_answer(self):
+        """Moves to next question."""
+        # Find iFrame to focus
+        frame = self.driver.find_element(By.XPATH, "//iframe")
+        frame.send_keys(Keys.RETURN)
         time.sleep(.5)
         try:
-            self.driver.find_element(By.XPATH, "//html").send_keys(Keys.RETURN)
-        except NoSuchElementException:
+            frame.send_keys(Keys.RETURN)
+        except StaleElementReferenceException:
             # We've probably finished the question set. Ignore
             pass
-        self.driver.switch_to.default_content() # Switch to root site
 
     def wait_load(self):
         """Wait for question to load."""
