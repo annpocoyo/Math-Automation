@@ -64,7 +64,7 @@ class AutoMathleticsClass(AutoBrowserBase):
         
         # Move to next question
         self.driver.find_element(By.XPATH, "//html").send_keys(Keys.RETURN)
-        time.sleep(.15)
+        time.sleep(.5)
         try:
             self.driver.find_element(By.XPATH, "//html").send_keys(Keys.RETURN)
         except NoSuchElementException:
@@ -89,7 +89,7 @@ class AutoMathleticsClass(AutoBrowserBase):
     @property
     def quiz_finished(self):
         """True if quiz finished, otherwise False."""
-        time.sleep(.15) # Give time for finish screen to show!
+        time.sleep(.5) # Give time for finish screen to show!
         return len(
             self.driver.find_elements(By.XPATH, "//*[contains(text(), 'Congratulations!')]")) > 0
 
