@@ -30,10 +30,25 @@ def main():
         match auto_mathletics.current_type:
             case "evaluation" | "integertype":
                 answer = eval(auto_mathletics.current_equation) # Get & evaluate question
-                auto_mathletics.send_answer(answer) # Send in answer
-            case _:
+            case "equlesgre":
+                if (auto_mathletics.current_integers_on_display[0] == 
+                    auto_mathletics.current_integers_on_display[1]):
+                    answer = "="
+                elif (auto_mathletics.current_integers_on_display[0] < 
+                    auto_mathletics.current_integers_on_display[1]):
+                    answer = "<"
+                else:
+                    answer = ">"
+            case None:
                 print("ERROR: Unknown question format detected: Please complete manually and move to next question!")
                 input("Press enter once you have moved to the next question:")
+                continue
+            case _:
+                print(f"ERROR: Question format type {auto_mathletics.current_type} has not been automated:")
+                print("THIS IS A BUG! Please report this and proceed to complete the question manually!")
+                input("Press enter once you have moved to the next question:")
+                continue
+        auto_mathletics.send_answer(answer) # Send in answer
 
     input("Question set finished: Yay!!!:")
     auto_mathletics.driver.quit() # Cleanly shutdown the browser before we exit.

@@ -26,6 +26,8 @@ class AutoMathleticsClass(AutoBrowserBase):
                 return self._evaluation_send_answer(answer)
             case "integertype":
                 return self._integertype_send_answer(answer)
+            case "equlesgre":
+                return self._multiple_choice_send_answer(answer)
             case _:
                 raise ValueError("Unknown question type!")
 
@@ -58,6 +60,15 @@ class AutoMathleticsClass(AutoBrowserBase):
         
         # Move to next question
         self.driver.switch_to.default_content() # Switch to root site
+        self._confirm_answer()
+
+    def _multiple_choice_send_answer(self, answer: str):
+        # Check answer provided and click the matching button
+        self.driver.switch_to.frame(0) # Switch to question IFrame
+        self.driver.find_element(By.XPATH, f"//*[text()='{answer}']").click()
+        self.driver.switch_to.default_content() # Switch to root site
+
+        # Move to next question
         self._confirm_answer()
 
     def _confirm_answer(self):
@@ -113,6 +124,20 @@ class AutoMathleticsClass(AutoBrowserBase):
         return value # Return equation
     
     @property
+    def current_integers_on_display(self):
+        """Current two integers on display. Only works on equlesgre type questions!"""
+        # Make sure current question is a equlesgre type
+        if not self.current_type == "equlesgre":
+            return
+        
+        # Get and return the two integers
+        self.driver.switch_to.frame(0) # Switch to question IFrame
+        integers = [int("".join(self.driver.find_element(By.CSS_SELECTOR, "[text*='question[0]']").text.split())),
+                    int("".join(self.driver.find_element(By.CSS_SELECTOR, "[text*='question[1]']").text.split()))]
+        self.driver.switch_to.default_content() # Switch to root site
+        return integers
+
+    @property
     def current_type(self):
         """Current type of question"""
         # Get top level question instructions and compare
@@ -125,5 +150,7 @@ class AutoMathleticsClass(AutoBrowserBase):
             case "Will the answer be negative, zero or positive?" | \
                 "Will the answer be positive, negative, or zero?":
                 return "integertype"
+            case "Select: <, =, or >.":
+                return "equlesgre"
             case _:
                 return None
