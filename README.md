@@ -3,6 +3,14 @@
 
 Automate Mathletics and (WIP) MyiMaths!
 
+## Dependencies
+
+You will need Python and the following programs/modules:
+
+* Selenium (Python Module) - for automating and controlling the browser.
+* Chrome - This should be obvious.
+* Chromedriver (external program ) - Connecting selenium to Chrome.
+
 ## Support
 
 ### Mathletics
