@@ -1,0 +1,31 @@
+name: PyInstaller EXE Build for Windows
+run-name: Push to ${{ github.ref }} triggered build of windows exe for repo.
+on: push
+jobs:
+  Auto-Mathletics-Build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5.4.0
+        with:
+          # Version range or exact version of Python or PyPy to use, using SemVer's version range syntax. Reads from .python-version if unset.
+          python-version: '3.11'
+          # The target architecture (x86, x64, arm64) of the Python or PyPy interpreter.
+          architecture: x64
+      - name: Install selenium and pyinstaller
+        run: pip install pyinstaller selenium
+      - name: Run pyinstaller
+        working-directory: ${{ github.workspace }}
+        run: pyinstaller  "--paths=${{ github.workspace }}/Library" -F "${{ github.workspace }}/automathletics.py"
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          # Name of the artifact to upload.
+          # Optional. Default is 'artifact'
+          name: auto-mathletics.exe
+      
+          # A file, directory or wildcard pattern that describes what to upload
+          # Required.
+          path: ${{ github.workspace }}/dist/automathletics.exe
