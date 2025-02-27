@@ -1,8 +1,8 @@
-name: PyInstaller EXE Build for Windows
+name: PyInstaller Build/Release
 run-name: Push to ${{ github.ref }} triggered build of windows exe for repo.
 on: push
 jobs:
-  Auto-Mathletics-Build:
+  build-windows:
     runs-on: windows-latest
     steps:
       - name: Checkout repo
@@ -19,7 +19,7 @@ jobs:
       - name: Run pyinstaller
         working-directory: ${{ github.workspace }}
         run: pyinstaller  "--paths=${{ github.workspace }}/Library" -F "${{ github.workspace }}/automathletics.py"
-      - name: Upload artifact
+      - name: Upload artifact to GitHub actions
         uses: actions/upload-artifact@v4
         with:
           # Name of the artifact to upload.
@@ -29,3 +29,12 @@ jobs:
           # A file, directory or wildcard pattern that describes what to upload
           # Required.
           path: ${{ github.workspace }}/dist/automathletics.exe
+      - name: Upload artifact to GitHub RELEASE as draft
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          body: 'DRAFT: PLEASE ADD TEXT YOURSELF!'
+          draft: true
+          prerelease: true
+          token: ${{ secrets.RELEASE_GITHUB_TOKEN }}
+          files: ${{ github.workspace }}/dist/automathletics.exe
