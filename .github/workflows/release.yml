@@ -1,5 +1,5 @@
 name: PyInstaller Build/Release
-run-name: Push to ${{ github.ref }} triggered build of windows exe for repo.
+run-name: Push to ${{ github.ref }} triggered build for repo.
 on: push
 jobs:
   build-windows:
