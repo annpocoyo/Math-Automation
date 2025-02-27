@@ -39,5 +39,6 @@ jobs:
           body: 'DRAFT: PLEASE ADD TEXT YOURSELF!'
           draft: true
           prerelease: true
-          token: ${{ secrets.RELEASE_GITHUB_TOKEN }}
           files: ${{ github.workspace }}/dist/automathletics.exe
+    permissions:
+      contents: write
