@@ -26,7 +26,7 @@ class AutoBrowserBase:
             else:
                 # No, ask for the path
                 chrome_driver_path = \
-                    input("Please enter the full path to chomedriver:")\
+                    input("Please enter the full path to chromedriver:")\
                         .strip('\"') \
                         .strip("\'") # Strip out quotes from the path just incase
 
@@ -35,7 +35,7 @@ class AutoBrowserBase:
 
         # Setup command line arguments
         options = Options()
-        options.add_argument("--user-data-dir=./profile") # for custom profile
+        options.add_argument("--user-data-dir=profile") # for custom profile
         options.add_argument("--hide-crash-restore-bubble") # Disable annoying crash restore bubble
 
         # Load driver for website
