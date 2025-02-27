@@ -14,8 +14,11 @@ jobs:
           python-version: '3.11'
           # The target architecture (x86, x64, arm64) of the Python or PyPy interpreter.
           architecture: x64
+          # Caching
+          cache: 'pip'
+          cache-dependency-path: '${{ github.workspace }}/requirements-ghactions.txt'
       - name: Install selenium and pyinstaller
-        run: pip install pyinstaller selenium
+        run: pip install -r "${{ github.workspace }}/requirements-ghactions.txt"
       - name: Run pyinstaller
         working-directory: ${{ github.workspace }}
         run: pyinstaller  "--paths=${{ github.workspace }}/Library" -F "${{ github.workspace }}/automathletics.py"
