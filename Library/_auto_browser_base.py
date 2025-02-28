@@ -37,7 +37,7 @@ class AutoBrowserBase:
         options = Options()
 
         # Custom profile doesn't work in Windows
-        if not platform.system == "Windows":
+        if not platform.system() == "Windows":
             options.add_argument("--user-data-dir=profile") # for persistent profile
             options.add_argument("--hide-crash-restore-bubble") # Disable annoying crash restore bubble
 
