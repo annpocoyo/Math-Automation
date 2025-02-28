@@ -1,6 +1,6 @@
 name: PyInstaller Build
-run-name: Push to ${{ github.ref }} triggered build for repo.
-on: push
+run-name: ${{ github.ref }} triggered build for repo.
+on: [push, workflow_call]
 jobs:
   build-windows:
     runs-on: windows-latest
