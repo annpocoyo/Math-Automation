@@ -1,0 +1,27 @@
+name: Release
+run-name: ${{ github.ref }} triggered release for repo.
+on:
+  push:
+    tags:
+      - v*
+  workflow_dispatch:
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+  release:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download all build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts/
+          merge-multiple: true
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          body: 'DRAFT: PLEASE ADD TEXT YOURSELF!'
+          draft: true
+          files: artifacts/*
+    permissions:
+      contents: write
