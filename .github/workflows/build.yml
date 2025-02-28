@@ -28,9 +28,7 @@ jobs:
           architecture: ${{ matrix.arch }}
           # Caching
           cache: 'pip'
-          cache-dependency-path: |
-            '${{ github.workspace }}/requirements.txt'
-            '${{ github.workspace }}/requirements-build.txt'
+          cache-dependency-path: '${{ github.workspace }}/requirements*.txt'
       - name: Install selenium and pyinstaller
         run: pip install -r "${{ github.workspace }}/requirements.txt" -r "${{ github.workspace }}/requirements-build.txt"
       - name: Run pyinstaller
