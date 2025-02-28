@@ -35,8 +35,11 @@ class AutoBrowserBase:
 
         # Setup command line arguments
         options = Options()
-        options.add_argument("--user-data-dir=profile") # for custom profile
-        options.add_argument("--hide-crash-restore-bubble") # Disable annoying crash restore bubble
+
+        # Custom profile doesn't work in Windows
+        if not platform.system == "Windows":
+            options.add_argument("--user-data-dir=profile") # for persistent profile
+            options.add_argument("--hide-crash-restore-bubble") # Disable annoying crash restore bubble
 
         # Load driver for website
         # Make sure custom chromedriver is respected
