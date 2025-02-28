@@ -1,4 +1,4 @@
-name: PyInstaller Build
+name: Build
 run-name: ${{ github.ref }} triggered build for repo.
 on: [push, workflow_call, workflow_dispatch]
 jobs:
