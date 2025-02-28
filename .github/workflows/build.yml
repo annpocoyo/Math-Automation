@@ -28,9 +28,11 @@ jobs:
           architecture: ${{ matrix.arch }}
           # Caching
           cache: 'pip'
-          cache-dependency-path: '${{ github.workspace }}/requirements-ghactions.txt'
+          cache-dependency-path: |
+            '${{ github.workspace }}/requirements.txt'
+            '${{ github.workspace }}/requirements-build.txt'
       - name: Install selenium and pyinstaller
-        run: pip install -r "${{ github.workspace }}/requirements-ghactions.txt"
+        run: pip install -r "${{ github.workspace }}/requirements.txt -r "${{ github.workspace }}/requirements-build.txt"
       - name: Run pyinstaller
         working-directory: ${{ github.workspace }}
         run: pyinstaller  "--paths=${{ github.workspace }}/Library" -F -n "auto-mathletics-${{ matrix.suffix }}" "${{ github.workspace }}/automathletics.py"
