@@ -1,4 +1,4 @@
-name: PyInstaller Build/Release
+name: PyInstaller Build
 run-name: Push to ${{ github.ref }} triggered build for repo.
 on: push
 jobs:
@@ -32,13 +32,3 @@ jobs:
           # A file, directory or wildcard pattern that describes what to upload
           # Required.
           path: ${{ github.workspace }}/dist/automathletics.exe
-      - name: Upload artifact to GitHub RELEASE as draft
-        uses: softprops/action-gh-release@v2
-        if: startsWith(github.ref, 'refs/tags/')
-        with:
-          body: 'DRAFT: PLEASE ADD TEXT YOURSELF!'
-          draft: true
-          prerelease: true
-          files: ${{ github.workspace }}/dist/automathletics.exe
-    permissions:
-      contents: write
