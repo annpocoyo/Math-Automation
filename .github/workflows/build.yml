@@ -1,6 +1,6 @@
 name: PyInstaller Build
 run-name: ${{ github.ref }} triggered build for repo.
-on: [push, workflow_call]
+on: [push, workflow_call, workflow_dispatch]
 jobs:
   build:
     runs-on: ${{ matrix.runner }}
