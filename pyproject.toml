@@ -1,0 +1,26 @@
+[project]
+name = "math-automation"
+version = "0.2.1"
+description = "Automate Mathletics and (future) iMaths"
+authors = [
+    {name = "annpocoyo",email = "ryant23@outlook.ie"}
+]
+readme = "README.md"
+requires-python = ">=3.11, <3.15"
+dependencies = [
+    "selenium (>=4.38,<5.0.0)",
+    "click (>=8.3.1,<9.0.0)"
+]
+
+[project.scripts]
+auto_mathletics = 'math_automation.mathletics_entrypoint:main'
+
+[dependency-groups]
+dev = [
+    "pyinstaller (>=6.16.0,<7.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

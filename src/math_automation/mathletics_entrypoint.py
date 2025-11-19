@@ -6,17 +6,15 @@ Selenium - Browser automation library
 """
 
 # Import Modules
-import os # For custom modules
-import sys # For custom modules
+import sys
+import click
+from math_automation._mathletics_library import AutoMathleticsClass
 
-# Add custom modules to path
-sys.path.append(f"{os.path.dirname(os.path.abspath(sys.argv[0]))}/Library")
-
-# Load custom librarys
-from auto_mathletics_library import AutoMathleticsClass
-auto_mathletics = AutoMathleticsClass()
-
-def main():
+@click.command()
+@click.option("--chromedriver-path", default=None, help='Path to chromedriver, leave empty to automatically find one.')
+def main(chromedriver_path):
+    """Automates Mathletics"""
+    auto_mathletics = AutoMathleticsClass(chrome_driver_path=chromedriver_path)
     # We begin:
     # Wait for user to confirm to have started activity.
     print("Please sign into Mathletics and start your target activity.")
@@ -31,10 +29,10 @@ def main():
             case "evaluation" | "integertype":
                 answer = eval(auto_mathletics.current_equation) # Get & evaluate question
             case "equlesgre":
-                if (auto_mathletics.current_integers_on_display[0] == 
+                if (auto_mathletics.current_integers_on_display[0] ==
                     auto_mathletics.current_integers_on_display[1]):
                     answer = "="
-                elif (auto_mathletics.current_integers_on_display[0] < 
+                elif (auto_mathletics.current_integers_on_display[0] <
                     auto_mathletics.current_integers_on_display[1]):
                     answer = "<"
                 else:
@@ -53,5 +51,5 @@ def main():
     input("Question set finished: Yay!!!:")
     auto_mathletics.driver.quit() # Cleanly shutdown the browser before we exit.
 
-if __name__ == '__main__':
-    main()
+if __name__ == "__main__":
+    sys.exit(main())

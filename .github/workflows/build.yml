@@ -19,6 +19,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+      - name: Install Poetry
+        run: pipx install poetry
       - name: Setup Python
         uses: actions/setup-python@v5.4.0
         with:
@@ -27,20 +29,19 @@ jobs:
           # The target architecture (x86, x64, arm64) of the Python or PyPy interpreter.
           architecture: ${{ matrix.arch }}
           # Caching
-          cache: 'pip'
-          cache-dependency-path: '${{ github.workspace }}/requirements*.txt'
-      - name: Install selenium and pyinstaller
-        run: pip install -r "${{ github.workspace }}/requirements.txt" -r "${{ github.workspace }}/requirements-build.txt"
+          cache: 'poetry'
+      - name: Install project and dependencies
+        run: poetry install
       - name: Run pyinstaller
         working-directory: ${{ github.workspace }}
-        run: pyinstaller  "--paths=${{ github.workspace }}/Library" -F -n "auto-mathletics-${{ matrix.suffix }}" "${{ github.workspace }}/automathletics.py"
+        run: pyinstaller -F -n "auto-mathletics-${{ matrix.suffix }}" "${{ github.workspace }}/automathletics.py"
       - name: Upload artifact to GitHub actions
         uses: actions/upload-artifact@v4
         with:
           # Name of the artifact to upload.
           # Optional. Default is 'artifact'
           name: auto-mathletics-${{ matrix.suffix }}
-      
+
           # A file, directory or wildcard pattern that describes what to upload
           # Required.
           path: ${{ github.workspace }}/dist/*
