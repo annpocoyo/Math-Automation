@@ -17,6 +17,7 @@ jobs:
             suffix: "macos-arm64"
             arch: "arm64"
           - runner: "ubuntu-latest"
+            suffix: "pip"
             arch: "x64"
             package: true
     steps:
