@@ -34,7 +34,7 @@ jobs:
         run: poetry install
       - name: Run pyinstaller
         working-directory: ${{ github.workspace }}
-        run: pyinstaller -F -n "auto-mathletics-${{ matrix.suffix }}" "${{ github.workspace }}/automathletics.py"
+        run: poetry run pyinstaller -F -n "auto-mathletics-${{ matrix.suffix }}" "${{ github.workspace }}/automathletics.py"
       - name: Upload artifact to GitHub actions
         uses: actions/upload-artifact@v4
         with:
