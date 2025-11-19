@@ -16,6 +16,9 @@ jobs:
           - runner: "macos-latest"
             suffix: "macos-arm64"
             arch: "arm64"
+          - runner: "ubuntu-latest"
+            arch: "x64"
+            package: true
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -32,9 +35,17 @@ jobs:
           cache: 'poetry'
       - name: Install project and dependencies
         run: poetry install
+
       - name: Run pyinstaller
+        # Only want to run pyinstaller if we aren't making a PIP package
+        if: ${{ !matrix.package }}
         working-directory: ${{ github.workspace }}
         run: poetry run pyinstaller -F -n "auto-mathletics-${{ matrix.suffix }}" "${{ github.workspace }}/src/math_automation/mathletics_entrypoint.py"
+      - name: Create PIP package
+        # Only want to make a PIP package if we are specifically in the PIP package matrix
+        if: ${{ matrix.package }}
+        working-directory: ${{ github.workspace }}
+        run: poetry build
       - name: Upload artifact to GitHub actions
         uses: actions/upload-artifact@v4
         with:
