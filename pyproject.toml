@@ -1,6 +1,6 @@
 [project]
 name = "math-automation"
-version = "0.2.1"
+version = "0.2.2"
 description = "Automate Mathletics and (future) iMaths"
 authors = [
     {name = "annpocoyo",email = "ryant23@outlook.ie"}
